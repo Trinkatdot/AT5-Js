@@ -42,8 +42,9 @@ function cadastroPrestadores() {
         prestador["pispasep"] = pisPasep;
         prestador["quantashoras"] = parseInt(quantashoras);
         prestador["valorhoras"] = parseFloat(valorHora);
-
-        //calculo Inss
+        //valorbruto
+        let valorBruto = prestador.quantashoras * prestador.valorhoras;
+        //valores Inss
         let inss;
         if (valorBruto <= 1500.99) {
             inss = 0.075; 
@@ -71,24 +72,24 @@ function cadastroPrestadores() {
         }
         irpf = valorBruto * irpf;
 
+       
         // Cálculo do valor líquido
         let valorLiquido = valorBruto - (inss + irpf);
-
-
-        
-
+        prestador["valorBruto"] = valorBruto;
+        prestador["inss"] = inss;
+        prestador["irpf"] = parseFloat(irpf);
+        prestador["valorliquido"] = parseFloat(valorLiquido);
 
         funcionarios.push(prestador);
         contador++;
 
         if (contador < 2)
-            continuar = true;
-        else if (contador >= 2 && contador < 50)
+            continuar = true; 
+        else if (contador < 50)
             continuar = confirm("Deseja continuar o cadastro?");
-        else{
+        else {
             continuar = false;
         }
-
 
     } while (continuar);    
 
@@ -102,7 +103,11 @@ function exibirEmpreguetes(listarfuncionario) {
             Nome: ${emp["nome"]} <br/>
             Pis/Pasep: ${emp["pispasep"]}  <br/>
             Quantas Horas: ${emp["quantashoras"]} <br/>
-            Valor da Hora: R$ ${emp["valorhoras"].toFixed(2)} <br/>
+            Valor da Hora: R$ ${emp["valorhoras"]} <br/>
+            Valor Bruto: R$ ${emp["inss"]} <br/>
+            INSS: R$ ${emp["inss"]} <br/>
+            IRPF: R$ ${emp["irpf"]} <br/>
+            Valor Líquido: R$ ${emp["valorLiquido"]} <br/>
             <br/><br/>
         `;
     }
@@ -113,3 +118,6 @@ let lista = cadastroPrestadores();
 exibirEmpreguetes(lista);
 
 console.log(lista);
+
+
+//socorro! 
