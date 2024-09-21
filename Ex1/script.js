@@ -44,27 +44,39 @@ function cadastroPrestadores() {
         prestador["valorhoras"] = parseFloat(valorHora);
 
         //calculo Inss
-        let valorbruto = prestador.quantashoras * prestador.valorhoras;
-        let inss = 0;
-        if (valorbruto <= 1500.99){
-            inss = 0.075
-        }else if (valorbruto === 1501.00 && valorbruto <= 3000.99){
-            inss = 0.09
-        }else if (valorbruto === 3001.00 && valorbruto <= 5000.99){
-            inss = 0.09
-        }else (valorbruto > 5001.00) 
-            inss = 0.014
-        //calculo do Irpf
-       
-    
-        if (valorbruto <= 1500.99){
-            irpf = 0.0
-        }else if (valorbruto === 1501.00 && valorbruto <= 3000.99){
-            irpf = 0.75
-        }else if (valorbruto === 3001.00 && valorbruto <= 5000.99){
-            irpf = 0.15
-        }else (valorbruto > 5001.00) 
-            irpf = 0.02
+        let inss;
+        if (valorBruto <= 1500.99) {
+            inss = 0.075; 
+        } else if (valorBruto <= 3000.99) {
+            inss = 0.09;  
+        } else if (valorBruto <= 5000.99) {
+            inss = 0.12;  
+        } else {
+            inss = 0.14;  
+        }
+        inss = valorBruto * inss;
+
+        // Cálculo do IRPF
+        let irpf;
+        if (valorBruto <= 1500.99) {
+            irpf = 0.0;
+        } else if (valorBruto <= 2000.99) {
+            irpf = 0.075; 
+        } else if (valorBruto <= 3000.99) {
+            irpf = 0.15;  
+        } else if (valorBruto <= 4000.99) {
+            irpf = 0.225; 
+        } else {
+            irpf = 0.275; 
+        }
+        irpf = valorBruto * irpf;
+
+        // Cálculo do valor líquido
+        let valorLiquido = valorBruto - (inss + irpf);
+
+
+        
+
 
         funcionarios.push(prestador);
         contador++;
