@@ -24,10 +24,12 @@ function cadastroPrestadores() {
         
         //inicia loop para entradas dos dados
 
-        let prestador = {};
+        let prestador = {}; //define objeto que sera gardado depois
         let nome = prompt("Informe o nome completo:");
         while (!isNaN(nome) || nome.trim().split(" ").length < 2 || nome.length < 3) {
             nome = prompt("Informe o Nome novamente (deve conter pelo menos um espaço):");
+            //trim() remove os espaços em branco do início e do fim 
+            //split() do divide uma string em substrings e as retorna em um array
         }
 
         let pisPasep = prompt("Informe o seu PIS ou PASEP:");
@@ -113,7 +115,7 @@ function cadastroPrestadores() {
 //exibe os dados informados e calculo em HTML
 function exibirEmpreguetes(listarfuncionario) {
     let mensagem = "";
-    for (let i = 0; i < listarfuncionario.length; i++) {
+    for (let i = 0; i < listarfuncionario.length; i++) { //conta quantas vezes vai pegar as informações (de acordo com o tanto de cadastro)
         let emp = listarfuncionario[i]; //define variavel que deve capturar informações no arrey
         //mensagem de resultado. (faltou colocar tofixed)
         mensagem += ` 
@@ -128,11 +130,11 @@ function exibirEmpreguetes(listarfuncionario) {
             <br/><br/>
         `;
     }
-    document.write(mensagem);
+    document.write(mensagem); //exibe mensagem da função
 }
 
 let lista = cadastroPrestadores(); //define uma variavel com a função de cadastro de dados
-exibirEmpreguetes(lista); //exibe o resultado da função utilizando os dados dela
+exibirEmpreguetes(lista); //exibe o resultado da função utilizando os dados de outra.
 
 
 
